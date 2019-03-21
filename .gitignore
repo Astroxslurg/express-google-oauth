@@ -1,0 +1,33 @@
+# Node modules are included on purpose.
+# This is to have complete control of the packages.
+# This implies enforcing strict rules of git usage.
+# Cache is still gitignored ofc.
+node_modules/.cache/*
+
+# Environment variables. Secrets can be put here.
+.env
+
+#yarn
+yarn-error.log
+
+# testing
+coverage
+
+# production
+build
+
+# misc
+npm-debug.log
+
+# Mac
+.DS_Store
+
+# emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*

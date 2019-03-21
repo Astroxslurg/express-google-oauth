@@ -1,0 +1,21 @@
+{
+  "name": "infosec-express-server",
+  "version": "1.0.0",
+  "description": "express backend for the infosec project",
+  "main": "index.js",
+  "author": "Kristian Trandem <kristiantrandem@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon index.js"
+  },
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
