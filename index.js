@@ -27,15 +27,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(oauth.router);
 
-// // Books
-// app.use('/books', require('./books/crud'));
-// app.use('/api/books', require('./books/api'));
-//
-// // Redirect root to /books
-// app.get('/', (req, res) => {
-//   res.redirect('/books');
-// });
-
 app.get("/", (req, res) =>
   res.send("<html><body><h1>Hello and welcome!</h1></body></html>")
 );
@@ -51,9 +42,16 @@ app.use(oauth.required);
 
 app.get("/restricted", (req, res) =>
   res.send(
-    "<html><body style='background-color: #371212; color: #edd'><h1>Welcome to the restricted area!</h1></body></html>"
+    `<html><body style='background-color: #371212; color: #edd'><h1>Welcome, ${req.user.displayName}!</h1></body></html>`
   )
 );
+
+app.use(oauth.adminRequired);
+
+app.get("/admin", (req, res) =>
+	res.send(
+	    "<html><body style='background-color: #122630; color: #d0dad0'><h1>Welcome to the admin area!</h1></body></html>"
+	));
 
 // Basic 404 handler
 app.use((req, res) => {

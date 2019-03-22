@@ -34,7 +34,9 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       // Extract the minimal profile information we need from the profile object
       // provided by Google
-      cb(null, extractProfile(profile));
+	cb(null, extractProfile(profile));
+	console.log("-- profile --");
+	console.log(extractProfile(profile));
     }
   )
 );
@@ -58,6 +60,18 @@ function authRequired(req, res, next) {
     return res.redirect("/auth/login");
   }
   next();
+}
+
+function adminRequired(req, res, next) {
+    console.log("-- Admin required --");
+    console.log(req.user);
+    if (req.user.id == process.env.ADMIN_ID) {
+	next();
+    } else {
+	return res.send(
+	    "<html><body style='background-color: #001a12; color: #da1010'><h1>YOU ARE NOT ADMIN!!!!!1 >:(</h1></body></html>"
+	);
+    }
 }
 
 // Middleware that exposes the user's profile as well as login/logout URLs to
@@ -94,7 +108,8 @@ router.get(
   },
 
   // Start OAuth 2 flow using Passport.js
-  passport.authenticate("google", { scope: ["email"] })
+    passport.authenticate("google", { scope: ["email"] })
+    
 );
 // [END authorize]
 
@@ -127,5 +142,6 @@ module.exports = {
   extractProfile: extractProfile,
   router: router,
   required: authRequired,
-  template: addTemplateVariables
+  template: addTemplateVariables,
+  adminRequired: adminRequired,  
 };
