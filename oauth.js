@@ -8,9 +8,8 @@ function extractProfile(profile) {
     imageUrl = profile.photos[0].value;
   }
   return {
-    id: profile.id,
-    displayName: profile.displayName,
-    image: imageUrl
+    image: imageUrl,
+    ...profile,
   };
 }
 
@@ -108,7 +107,7 @@ router.get(
   },
 
   // Start OAuth 2 flow using Passport.js
-    passport.authenticate("google", { scope: ["email"] })
+  passport.authenticate("google", { scope: ['https://www.googleapis.com/auth/plus.login'] })
     
 );
 // [END authorize]
@@ -120,7 +119,7 @@ router.get(
   "/auth/google/callback",
 
   // Finish OAuth 2 flow using Passport.js
-  passport.authenticate("google", { scope: ["email"] }),
+  passport.authenticate("google", { scope: ['https://www.googleapis.com/auth/plus.login'] }),
 
   // Redirect back to the original page, if any
   (req, res) => {
