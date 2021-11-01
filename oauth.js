@@ -31,7 +31,7 @@ passport.use(
       accessType: "offline",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },
-    (accessToken, refreshToken, profile, cb) => {
+    (req, accessToken, refreshToken, profile, cb) => {
       // Extract the minimal profile information we need from the profile object
       // provided by Google
 	cb(null, extractProfile(profile));
